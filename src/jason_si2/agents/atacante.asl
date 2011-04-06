@@ -2,7 +2,7 @@
 
 /* Initial beliefs and rules */
 
-posicaoInicial(6, 8).
+posicaoInicial(5, 8).
 time(team_a).
 		
 
