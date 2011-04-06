@@ -1,8 +1,8 @@
-// Atacante
+﻿// Atacante
 
 /* Initial beliefs and rules */
 
-posicaoInicial(5, 8).
+posicaoInicial(6, 8).
 time(team_a).
 		
 
