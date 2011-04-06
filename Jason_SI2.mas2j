@@ -1,0 +1,9 @@
+/* Jason Project */
+
+MAS jason_SI2 {
+
+    infrastructure: Centralised
+
+    agents:
+}
+
