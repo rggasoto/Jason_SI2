@@ -1,31 +1,47 @@
-// Goleiro
+// Agente: Goleiro
 
 /* Initial beliefs and rules */
 
-posicaoInicial(24, 8).
+posicao(505, 200).
 time(team_b).
+
 
 /* Initial goal */
 
-// Objetivo inicial: Se posicionar no campo
-!posicionar.
+// Objetivo inicial: entrar em campo 
+!entrarEmCampo.
 
 /* Plans */
+//Initial Goal
++!entrarEmCampo : true
+    <- ?posicao(X, Y); ?time(Z);
+       createPlayer(X, Y,Z);//Cria jogador no Tewnta na posi‹o [x,y], no time z
+	   !defesa. //inicia estratŽgia de defesa
 
-// Posicionamento inicial do goleiro no campo. Identifica tbm o time do goleiro.
-+!posicionar : true
-    <- ?posicaoInicial(X,Y); ?time(Z);
-       createPlayer(X,Y,Z);
-	   !defender.
 	   
-//Iniciar a estratÃ©gia de defesa.
-+!defender : true
-	<- !localizarBola;
-           !defender.
 	   
-//Localizar bola e rotacionar para ela (funÃ§Ã£o interna).
-+!localizarBola : true
+//Plano de defesa.                                                   
+
+//caso esteja com a bola, chutar
+
++!defesa : com(bola)
+	<- chutar(100);
+	!defesa.
+
+//caso padr‹o
++!defesa : true
+	<- 	?posBola(XBola,YBola);
+		?posicao(XGoleiro, YGoleiro);
+		!!verBola;
+		defender(XBola, YBola, XGoleiro, YGoleiro); 
+		!defesa.
+	   
+	   
+//Resgate a posicao da bola (percepcao) e rotacione olhando pra bola
++!verBola : true
 	<- ?posBola(X,Y);
-		rotacionaBola(X,Y).
+		rotacionePara(X,Y).
+		
+
 		
 		
